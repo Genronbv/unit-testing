@@ -23,7 +23,7 @@ public class VoteCounter {
 
 
     }
-    private void countParty(Party party) throws NoPartyException {
+    public void countParty(Party party) throws NoPartyException {
         if (this.validParties.containsKey(party)){
             int votesForParty = this.validParties.get(party);
             this.validParties.replace(party,votesForParty+1);
