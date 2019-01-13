@@ -35,7 +35,7 @@ public class VoteCounter {
     private void countNull() { this.countNull++;}
     private void countVotes() {this.countVotes++;}
     private void countBlank() { this.countBlank++; }
-    private void scrutinize(Party party) throws NoPartyException {
+    public void scrutinize(Party party) throws NoPartyException {
         if (party.getName().equals("null")){ countNull();}
         else if (party.getName().equals("")){ countBlank();}
         else {countParty(party);}
