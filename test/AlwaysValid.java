@@ -1,9 +1,8 @@
-package services;
-
 import data.DigitalSignature;
 import data.Nif;
 import data.Party;
 import exceptions.NoSignatureException;
+import services.ElectoralOrganism;
 
 public class AlwaysValid implements ElectoralOrganism {
     private byte[] si = {1,1};

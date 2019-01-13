@@ -1,8 +1,7 @@
-package services;
-
 import data.DigitalSignature;
 import data.MailAddress;
 import exceptions.NoMailException;
+import services.MailerService;
 
 
 public class AlwaysSend implements MailerService {
