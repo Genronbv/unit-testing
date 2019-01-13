@@ -10,28 +10,38 @@ import services.MailerService;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class KioskTest {
+    public ElectoralOrganism eo;
+    public MailerService as;
+    public VoteCounter vc;
+    public VotingKiosk vk;
+
+    @BeforeEach
+    void initAll() throws NoNameException {
+        eo = new AlwaysValid();
+        as = new AlwaysSend();
+        Set<Party> set = new HashSet<>(Arrays.asList(new Party("pp"), new Party("psoe"), new Party("ERC")));
+        vc = new VoteCounter(set);
+        vk = new VotingKiosk(vc);
+    }
 
     @Test
-    public void newVoteTest() throws NoNameException, NoPartyException, NoMailException, NoSignatureException {
-        ElectoralOrganism eo = new AlwaysValid();
-        MailerService as = new AlwaysSend();
-        Set<Party> set = new HashSet<>(Arrays.asList(new Party("pp"), new Party("psoe"), new Party("ERC")));
-        VoteCounter vc = new VoteCounter(set);
-        VotingKiosk vk = new VotingKiosk(vc);
+    public void newVoteTest() throws NoNameException, NoPartyException{
         vk.setMailerService(as);
         vk.setElectoralOrganism(eo);
         vk.vote(new Party("psoe"));
+    }
+
+
+    @Test
+    public void newMailTest() throws NoMailException, NoSignatureException {
+        vk.setMailerService(as);
+        vk.setElectoralOrganism(eo);
         MailAddress ma = new MailAddress("gbv4@alumnes.udl.cat");
         vk.sendeReceipt(ma);
     }
 
     @Test
     public void invalidMailTest() throws NoNameException, NoMailException, NoPartyException {
-        ElectoralOrganism eo = new AlwaysValid();
-        MailerService as = new AlwaysSend();
-        Set<Party> set = new HashSet<>(Arrays.asList(new Party("pp"), new Party("psoe"), new Party("ERC")));
-        VoteCounter vc = new VoteCounter(set);
-        VotingKiosk vk = new VotingKiosk(vc);
         vk.setMailerService(as);
         vk.setElectoralOrganism(eo);
         vk.vote(new Party("psoe"));
@@ -42,6 +52,9 @@ public class KioskTest {
 
 
     }
+
+    @AfterEach
+    public void teardown(){}
 
 
 }
