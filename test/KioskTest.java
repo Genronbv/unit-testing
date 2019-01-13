@@ -31,13 +31,20 @@ public class KioskTest {
         vk.vote(new Party("psoe"));
     }
 
-
     @Test
     public void newMailTest() throws NoMailException, NoSignatureException {
         vk.setMailerService(as);
         vk.setElectoralOrganism(eo);
         MailAddress ma = new MailAddress("gbv4@alumnes.udl.cat");
         vk.sendeReceipt(ma);
+    }
+
+    @Test
+    public void invalidPartyTest() throws NoNameException, NoMailException, NoPartyException {
+        vk.setMailerService(as);
+        vk.setElectoralOrganism(eo);
+        Throwable validmail = assertThrows(NoPartyException.class,
+                () -> {vk.vote(new Party("vox"));});
     }
 
     @Test
@@ -48,9 +55,6 @@ public class KioskTest {
         MailAddress ma = new MailAddress("invalidMail");
         Throwable validmail = assertThrows(NoMailException.class,
                 ()->{vk.sendeReceipt(ma);});
-
-
-
     }
 
     @AfterEach
