@@ -5,7 +5,7 @@ import exceptions.NoMailException;
 final public class MailAddress {
     private final String mail;
     public MailAddress(String mail) throws NoMailException {
-        if(mail == null || mail.equals("")) throw new NoMailException();
+        if(mail == null || mail.equals("")) throw new NoMailException("Introduce a valid address");
         this.mail = mail;
     }
     public String getMail(){ return this.mail;}

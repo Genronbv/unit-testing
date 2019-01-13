@@ -8,7 +8,7 @@ import exceptions.NoNameException;
 final public class Party {
     private final String name;
     public Party(String name) throws NoNameException {
-        if(name == null) throw new NoNameException();
+        if(name == null) throw new NoNameException("Introduce a valid Party");
         this.name = name;
     }
     public String getName() { return name; }

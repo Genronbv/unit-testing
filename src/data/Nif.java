@@ -7,7 +7,7 @@ final public class Nif {
     private final String nif;
     public Nif(String nif) throws NoNifException {
 
-        if(nif == null || nif.equals("")) throw new NoNifException();
+        if(nif == null || nif.equals("")) throw new NoNifException("Introduce a valid Nif");
         this.nif = nif;
     }
     public String getNif(){ return this.nif;}

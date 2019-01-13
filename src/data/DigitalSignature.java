@@ -7,7 +7,7 @@ final public class DigitalSignature {
     public DigitalSignature(byte[] signature) throws NoSignatureException
     {
         if(signature == null){
-            throw new NoSignatureException("Please, introduce a signature");
+            throw new NoSignatureException("Please, introduce a valid signature");
         }
         this.signature = signature;
     }
